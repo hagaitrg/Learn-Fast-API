@@ -9,7 +9,8 @@ class ModelName(str, Enum):
     lang = "lang"
     db = "db"
 
-grades = {
+class Students():
+    grades = {
     1: {
         "name" : "dimas",
         "class" : "SI-42-08",
@@ -29,7 +30,7 @@ def get_user(user_id:int):
 
 @app.get("/get-item/{item_id}")
 def get_data(item_id: int):
-    return grades[item_id]
+    return Students.grades[item_id]
 
 @app.get("/models/{model_name}")
 def get_model(model_name:ModelName):
