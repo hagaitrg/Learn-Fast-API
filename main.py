@@ -1,5 +1,6 @@
 from enum import Enum
 from fastapi import FastAPI
+from typing import Optional
 
 
 app = FastAPI()
@@ -19,6 +20,7 @@ class Students():
     }
 }
 
+# Learn path parmaeters
 @app.get("/users/me")
 def get_current_user():
     return {"user_id" : "the current user"}
@@ -39,3 +41,11 @@ def get_model(model_name:ModelName):
     if model_name is ModelName.lang:
         return {"model_name" : model_name, "message" :"i often use Python for logical coding"}
     return {"model_name" : model_name, "message":"i often use MySQL for building any App"}
+
+# Query parameters
+@app.get("/get-by-name")
+def get_item(name: Optional[str] = None):
+    for item_id in Students.grades:
+        if Students.grades[item_id]["name"] == name:
+            return Students.grades[item_id]
+    return {"Data" : "Not Found"}
